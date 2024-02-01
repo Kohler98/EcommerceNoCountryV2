@@ -49,7 +49,9 @@ const createProductsByExcel = async (req,res=response) =>{
  
     try {
         // Obtener los registros existentes en la base de datos
-        
+        if (!req.file) {
+            return res.status(400).json({ error: 'No se subió ningún archivo'});
+          }
  
         const excel = __dirname + `/../public/uploads/excels/${req.file.filename}`
         
