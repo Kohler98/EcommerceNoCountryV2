@@ -59,7 +59,15 @@ const login = async(req,res,next)=>{
   }
 const getAllUsers = async(req, res) =>{
     try {
-      const usuarios = await Usuarios.findAll();
+      const usuarios = await Usuarios.findAll({
+        attributes: { exclude: ['createdAt', 'updatedAt', 'token','password','activo'] },
+        include:[
+          {
+              model: Pedidos,
+              attributes: ['nombre','apellido', 'pais','estado','ciudad','postal_code','phone','productos','createdAt']
+          }
+      ]
+      });
       res.json(usuarios);
     } catch(err) {
  
@@ -70,7 +78,16 @@ const getAllUsers = async(req, res) =>{
 const getUserById = async(req,res)=>{
   const id = req.params.id;
   try {
-    const usuario = await Usuarios.findByPk(id);
+    const usuario = await Usuarios.findOne({
+      where:{id:id},
+      attributes: { exclude: ['createdAt', 'updatedAt', 'token','password','activo'] },
+      include:[
+        {
+            model: Pedidos,
+            attributes: ['nombre','apellido', 'pais','estado','ciudad','postal_code','phone','productos','createdAt']
+        }
+    ]
+    });
     if(usuario) {
       res.json(usuario);
     } else {
@@ -125,11 +142,19 @@ const deleteUser = async(req,res)=>{
 
 }
 const getUserProfile = async(req,res)=>{
-  const usuario = await Usuarios.findByPk(req.usuario.id)
-  const pedidos = await Pedidos.findAll({where:{usuarioId:req.usuario.id}})
+  const usuario = await Usuarios.findOne({
+    where:{id:req.usuario.id},
+    attributes: { exclude: ['createdAt', 'updatedAt', 'token','password','activo'] },
+    include:[
+      {
+          model: Pedidos,
+          attributes: ['nombre','apellido', 'pais','estado','ciudad','postal_code','phone','productos','createdAt']
+      }
+  ]
+  })
+ 
   res.json({
-    usuario,
-    pedidos
+    usuario 
   })
 }
  
