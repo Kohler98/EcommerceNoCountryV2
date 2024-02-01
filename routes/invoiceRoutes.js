@@ -12,6 +12,7 @@ router.post('/crear',
     subirExcelProducto,
     validarCampos,
 createProductsByExcel)
+
 router.get('',[
     isAuthenticated,
     authorizeRoles("ADMIN_ROLE"),

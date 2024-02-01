@@ -55,11 +55,13 @@ const createProductsByExcel = async (req,res=response) =>{
  
         const excel = __dirname + `/../public/uploads/excels/${req.file.filename}`
         
-   
+  
 
    
         const pruductosExcel = readExcelFile(excel)
-        
+        if(!pruductosExcel){
+            return res.status(400).json({ error: 'No se pudo leer el archivo excel'});
+        }
         const productsDB = await Productos.findAll({
             attributes: { exclude: ['createdAt', 'updatedAt', 'imagen','descuento','activo'] }
         });

@@ -119,6 +119,9 @@ const generarFactura = (pedido = {}, stream) =>{
     }
 }
 const generarExcel = (data,res, nameFile = '')=>{
+ 
+        
+
     const workbook = new excel.Workbook();
 
     
@@ -154,19 +157,26 @@ const generarExcel = (data,res, nameFile = '')=>{
         column++
     }
     workbook.write(`${nameFile}.xlsx`,res);
+
 }
 
 const readExcelFile = (file)=>{
     // Leer el archivo Excel
-    const workbook = XLSX.readFile(file);
- 
-    // Obtener el nombre de la primera hoja
-    const sheetName = workbook.SheetNames[0];
-
-    // Obtener los datos de la hoja en formato JSON
-    const sheetData = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName]);
+    try {
+        
+        const workbook = XLSX.readFile(file);
     
-    return sheetData
+        // Obtener el nombre de la primera hoja
+        const sheetName = workbook.SheetNames[0];
+
+        // Obtener los datos de la hoja en formato JSON
+        const sheetData = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName]);
+        
+        return sheetData
+    } catch (error) {
+            console.log(error)
+            return false
+    }
 }
 
 const formatearPedido = (usuario) =>{
