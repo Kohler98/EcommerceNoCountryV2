@@ -6,7 +6,12 @@ const { validarCampos } = require("../middleware/validarCampos");
 const { authorizeRoles } = require("../helpers/dbValidators");
 
 const router = Router()
-
+router.post('/crear',
+    isAuthenticated,
+    authorizeRoles("ADMIN_ROLE"),
+    subirExcelProducto,
+    validarCampos,
+createProductsByExcel)
 router.get('',[
     isAuthenticated,
     authorizeRoles("ADMIN_ROLE"),
@@ -42,11 +47,6 @@ router.get('/total/:id',[
     validarCampos,
 ],getAllResumeSellsUser)
 
-router.post('/crear',
-    isAuthenticated,
-    authorizeRoles("ADMIN_ROLE"),
-    subirExcelProducto,
-    validarCampos,
-createProductsByExcel)
+
 
 module.exports = router
