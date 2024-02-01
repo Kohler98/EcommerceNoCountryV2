@@ -118,7 +118,7 @@ const createProductsByExcel = async (req,res=response) =>{
           });
         res.json({msg:"Se han realizado los cambios con exito"})
     } catch (error) {
-        console.log(error)
+ 
         res.json({msg:"Hubo un error"})
     }
  

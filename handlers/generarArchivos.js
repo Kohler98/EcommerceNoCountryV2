@@ -174,8 +174,8 @@ const readExcelFile = (file)=>{
         
         return sheetData
     } catch (error) {
-            console.log(error)
-            return false
+        console.log(error)
+        return false
     }
 }
 
