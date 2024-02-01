@@ -55,7 +55,7 @@ const createProductsByExcel = async (req,res=response) =>{
  
         const excel = __dirname + `/../public/uploads/excels/${req.file.filename}`
         
-        console.log(excel)
+   
 
    
         const pruductosExcel = readExcelFile(excel)

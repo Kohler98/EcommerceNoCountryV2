@@ -42,7 +42,7 @@ router.get('/total/:id',[
     validarCampos,
 ],getAllResumeSellsUser)
 
-router.post('',
+router.post('/crear',
     isAuthenticated,
     authorizeRoles("ADMIN_ROLE"),
     subirExcelProducto,
