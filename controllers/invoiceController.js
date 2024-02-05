@@ -150,9 +150,11 @@ const getAllResumeSells = async(req,res = response)=>{
                 return res.json({msg:`No se realizaron pedidos en ${mes}`})
             }
             //  Descargando pedidos para el mes ${mes} 
+            // res.json(resultadosFiltrados)
             return generarExcel(resultadosFiltrados,res, `pedidos_totales_${mes}`)
             
         }else{
+            // res.json(nuevosUsuarios)
             return generarExcel(nuevosUsuarios,res, "pedidos_totales")
    
         }
@@ -191,10 +193,12 @@ const getAllResumeSellsUser = async(req,res = response)=>{
             }
             //  Descargando pedidos de el mes ${mes} para el usuario ${usuario.nombre} 
             return generarExcel(resultadosFiltrados,res, `${usuario.nombre}_${mes}`)
+            // res.json(resultadosFiltrados)
             
         }else{
             // descargando pedidos para el usuario ${usuario.nombre} 
             return generarExcel(nuevosUsuarios,res, `${usuario.nombre}_pedidos`)
+            // res.json(nuevosUsuarios)
         }
  
     } catch (error) {
